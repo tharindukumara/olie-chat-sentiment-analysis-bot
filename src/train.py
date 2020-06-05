@@ -75,7 +75,7 @@ def run():
         outputs, targets = engine.eval_fn(valid_data_loader, model, device)
         outputs = np.array(outputs) >= 0.5
         accuracy = metrics.accuracy_score(targets, outputs)
-        print(f"Accuracy Score = {accuracy}")
+        print("Accuracy Score = {}", accuracy)
         if accuracy > best_accuracy:
             torch.save(model.state_dict(), config.MODEL_PATH)
             best_accuracy = accuracy
