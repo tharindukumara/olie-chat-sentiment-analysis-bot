@@ -1,4 +1,3 @@
-import transformers
 from transformers import AutoModel, AutoTokenizer
 
 MODEL_PATH = "model.bin"
