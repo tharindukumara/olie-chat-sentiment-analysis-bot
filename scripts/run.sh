@@ -1,5 +1,4 @@
-pip3 install --upgrade pip
-pip3 install transformers
+pip install transformers
 
 cd src/
 python3 train.py
