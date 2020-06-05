@@ -1,4 +1,4 @@
 pip install transformers
 
 cd src/
-python train.py
+python3 train.py
