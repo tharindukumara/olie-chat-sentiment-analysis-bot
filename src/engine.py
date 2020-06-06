@@ -1,10 +1,7 @@
 import torch
+import loss
 import torch.nn as nn
 from tqdm import tqdm
-
-
-def loss_fn(outputs, targets):
-    return nn.BCEWithLogitsLoss()(outputs, targets.view(-1, 1))
 
 
 def train_fn(data_loader, model, optimizer, device, scheduler):
@@ -24,7 +21,7 @@ def train_fn(data_loader, model, optimizer, device, scheduler):
         optimizer.zero_grad()
         outputs = model(ids=ids, mask=mask, token_type_ids=token_type_ids)
 
-        loss = loss_fn(outputs, targets)
+        loss = loss.loss_fn(outputs, targets)
         loss.backward()
         optimizer.step()
         scheduler.step()
