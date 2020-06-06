@@ -11,11 +11,11 @@ import joblib
 
 
 app = Flask(__name__)
+app.config['APPLICATION_ROOT'] = '/api'
 
 MODEL = None
-DEVICE = "cuda"
 PREDICTION_DICT = dict()
-memory = joblib.Memory("../data/", verbose=0)
+# memory = joblib.Memory("../data/", verbose=0)
 
 
 def predict_from_cache(sentence):
@@ -27,7 +27,7 @@ def predict_from_cache(sentence):
         return result
 
 
-@memory.cache
+# @memory.cache
 def sentence_prediction(sentence):
     tokenizer = config.TOKENIZER
     max_len = config.MAX_LEN
@@ -51,9 +51,9 @@ def sentence_prediction(sentence):
     mask = torch.tensor(mask, dtype=torch.long).unsqueeze(0)
     token_type_ids = torch.tensor(token_type_ids, dtype=torch.long).unsqueeze(0)
 
-    ids = ids.to(DEVICE, dtype=torch.long)
-    token_type_ids = token_type_ids.to(DEVICE, dtype=torch.long)
-    mask = mask.to(DEVICE, dtype=torch.long)
+    ids = ids.to(config.DEVICE, dtype=torch.long)
+    token_type_ids = token_type_ids.to(config.DEVICE, dtype=torch.long)
+    mask = mask.to(config.DEVICE, dtype=torch.long)
 
     outputs = MODEL(ids=ids, mask=mask, token_type_ids=token_type_ids)
 
@@ -77,11 +77,16 @@ def predict():
     return flask.jsonify(response)
 
 
+def run():
+    global MODEL
 
-if __name__ == "__main__":
     MODEL = BERTBaseUncased()
     MODEL = nn.DataParallel(MODEL)
-    MODEL.load_state_dict(torch.load(config.MODEL_PATH))
-    MODEL.to(DEVICE)
+    MODEL.load_state_dict(torch.load(config.MODEL_PATH, map_location='cpu'))
+    MODEL.to(config.DEVICE)
     MODEL.eval()
     app.run()
+
+
+if __name__ == "__main__":
+    run()

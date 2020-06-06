@@ -63,7 +63,7 @@ def run():
         outputs, targets = engine.eval_fn(valid_data_loader, model, device)
         outputs = np.array(outputs) >= 0.5
         accuracy = metrics.accuracy_score(targets, outputs)
-        print("Accuracy Score = {}", accuracy)
+        print("Accuracy Score = {}".format(accuracy))
 
         if config.EARLY_STOPPING:
             es(accuracy, model, model_path=config.MODEL_PATH)
@@ -82,4 +82,5 @@ def run():
 
 
 if __name__ == "__main__":
+    print("Train Started")
     run()
