@@ -130,3 +130,5 @@ dmypy.json
 
 # Vs Code
 .vscode
+
+app/data
