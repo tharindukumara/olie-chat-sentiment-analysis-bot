@@ -1,7 +1,7 @@
 from flask_restplus import Api
 from flask import Blueprint
 
-from .main.controller.sentiment_prediction import api as sentiment_ns
+from .main.controller.sentiment_controller import api as sentiment_ns
 
 blueprint = Blueprint('api', __name__)
 

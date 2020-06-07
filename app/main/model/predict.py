@@ -1,15 +1,15 @@
-import config
-import app
 import torch
 import time
 import functools
 import torch.nn as nn
 import joblib
+import app.main.app as app
 
+from .config import TOKENIZER, MAX_LEN, DEVICE
 
 def predict(sentence):
-    tokenizer = config.TOKENIZER
-    max_len = config.MAX_LEN
+    tokenizer = TOKENIZER
+    max_len = MAX_LEN
     review = str(sentence)
     review = " ".join(review.split())
 
@@ -30,9 +30,9 @@ def predict(sentence):
     mask = torch.tensor(mask, dtype=torch.long).unsqueeze(0)
     token_type_ids = torch.tensor(token_type_ids, dtype=torch.long).unsqueeze(0)
 
-    ids = ids.to(config.DEVICE, dtype=torch.long)
-    token_type_ids = token_type_ids.to(config.DEVICE, dtype=torch.long)
-    mask = mask.to(config.DEVICE, dtype=torch.long)
+    ids = ids.to(DEVICE, dtype=torch.long)
+    token_type_ids = token_type_ids.to(DEVICE, dtype=torch.long)
+    mask = mask.to(DEVICE, dtype=torch.long)
 
     outputs = app.MODEL(ids=ids, mask=mask, token_type_ids=token_type_ids)
 

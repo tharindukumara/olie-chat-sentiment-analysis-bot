@@ -1,8 +1,8 @@
 import torch
 from transformers import AutoModel, AutoTokenizer
 
-MODEL_PATH = "../../data/model/model.bin"
-TRAINING_FILE = "../../data/imdb.csv"
+MODEL_PATH = "app/data/model/model.bin"
+TRAINING_FILE = "app/data/imdb.csv"
 
 MAX_LEN = 512
 TRAIN_BATCH_SIZE = 4

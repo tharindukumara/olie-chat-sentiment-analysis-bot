@@ -1,4 +1,3 @@
-import config
 import app
 import torch
 import time
@@ -8,25 +7,25 @@ import joblib
 import flask
 
 from flask import Flask
-from model import BERTBaseUncased
+from ..model.model import BERTBaseUncased
 from ..model.predict import predict
 from ..app import PREDICTION_DICT
 
-
+memory = joblib.Memory("app/data/cache", verbose=0)
 
 def predict_from_cache(sentence):
     if sentence in PREDICTION_DICT:
         return PREDICTION_DICT[sentence]
     else:
-        result = sentence_prediction(sentence)
+        result = predict(sentence)
         PREDICTION_DICT[sentence] = result
         return result
 
 
-@memory.cache
+
 def sentence_prediction(sentence):
     start_time = time.time()
-    positive_prediction = sentence_prediction(sentence)
+    positive_prediction = predict(sentence)
     negative_prediction = 1 - positive_prediction
     
     response = {}

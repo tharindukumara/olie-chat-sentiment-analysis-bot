@@ -1,8 +1,8 @@
 from flask_restplus import Namespace, fields
 
 
-class PredictDto:
-    api = Namespace('predict', description='sentiment prediction')
-    user = api.model('predict', {
+class SentimentDto:
+    api = Namespace('sentiment', description='sentiment prediction')
+    sentiment = api.model('sentiment', {
         'sentence': fields.String(required=True, description='sentence to predict'),
     })
