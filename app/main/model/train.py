@@ -1,14 +1,15 @@
-import config
-import params
-import dataset
-import engine
-import torch
-import utils
 import pandas as pd
 import torch.nn as nn
 import numpy as np
+import torch
 
-from model import BERTBaseUncased
+import app.main.model.config as config
+import app.main.model.params as params
+import app.main.model.dataset as dataset
+import app.main.model.engine as engine
+import app.main.model.utils as utils
+
+from app.main.model import BERTBaseUncased
 from sklearn import model_selection
 from sklearn import metrics
 from transformers import AdamW

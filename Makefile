@@ -18,4 +18,7 @@ tests:
 run:
 	python manage.py run
 
+train:
+	python 
+
 all: clean install tests run

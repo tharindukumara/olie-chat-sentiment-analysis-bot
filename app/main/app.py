@@ -10,7 +10,6 @@ PREDICTION_DICT = dict()
 MODEL = None
 
 
-
 def run():
     global MODEL
 

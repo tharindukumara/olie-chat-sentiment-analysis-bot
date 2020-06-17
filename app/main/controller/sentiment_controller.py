@@ -1,4 +1,5 @@
 from flask import request
+from flask_cors import cross_origin
 from flask_restplus import Resource
 from ..util.dto import SentimentDto
 from ..service.sentiment_service import sentence_prediction
@@ -7,6 +8,7 @@ api = SentimentDto.api
 _sentiment = SentimentDto.sentiment
 
 @api.route('/predict')
+# @cross_origin()
 class SentimentPrediction(Resource):
     @api.expect(_sentiment, validate=False)
     @api.response(200, 'Predict sentiment of the sentence.')
