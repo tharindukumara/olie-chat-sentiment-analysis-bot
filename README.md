@@ -1,5 +1,7 @@
 # bert-sentiment-analysis
 
+## AI based real-time chatbot that identifies the sentiments in your conversations.
+
 ### Train
     python train.py
 
