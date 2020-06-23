@@ -1,4 +1,4 @@
-# bert-sentiment-analysis
+# Olie Chat - Sentiment Analysis Bot
 
 ## AI based real-time chatbot that identifies the sentiments in your conversations.
 
